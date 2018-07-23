@@ -35,7 +35,7 @@ class Youtube_subs_Widget extends WP_Widget
 
         // Widget Content Output
         // echo esc_html__('Hello, World!', 'yts_domain');
-        echo "Hellow from YTS widget";
+        echo '<div class="g-ytsubscribe" data-channel="GoogleDevelopers" data-layout="full" data-count="default"></div>';
 
         echo $args['after_widget'];
     }
