@@ -4,11 +4,11 @@
     // Add Main CSS
     wp_enqueue_style('yts-main-style', plugins_url().'/youtube-subs/css/style.css');
     // Add Main JS
-    wp_enqueue_style('yts-main-style', plugins_url().'/youtube-subs/js/main.js');
+    wp_enqueue_script('yts-main-style', plugins_url().'/youtube-subs/js/main.js');
 
     // Add Google Script
-    wp_register_style('google', 'https://apis.google.com/js/platform.js');
-    wp_enqueue_style('google');
+    wp_register_script('google', 'https://apis.google.com/js/platform.js');
+    wp_enqueue_script('google');
 
 
 
