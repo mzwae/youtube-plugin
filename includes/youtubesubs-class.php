@@ -35,7 +35,7 @@ class Youtube_subs_Widget extends WP_Widget
 
         // Widget Content Output
         // echo esc_html__('Hello, World!', 'yts_domain');
-        echo '<div class="g-ytsubscribe" data-channel="GoogleDevelopers" data-layout="full" data-count="default"></div>';
+        echo '<div class="g-ytsubscribe" data-channel="'.$instance['channel'].'" data-layout="full" data-count="default"></div>';
 
         echo $args['after_widget'];
     }
@@ -49,7 +49,10 @@ class Youtube_subs_Widget extends WP_Widget
      */
     public function form($instance)
     {
-        $title = ! empty($instance['title']) ? $instance['title'] : esc_html__('New title', 'yts_domain'); ?>
+        $title = ! empty($instance['title']) ? $instance['title'] : esc_html__('YouTube Subs', 'yts_domain');
+        $channel = ! empty($instance['channel']) ? $instance['channel'] : esc_html__('GoogleDevelopers', 'yts_domain');
+         ?>
+         <!-- TITLE -->
 		<p>
   		<label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
         <?php esc_attr_e('Title:', 'yts_domain'); ?>
@@ -60,6 +63,19 @@ class Youtube_subs_Widget extends WP_Widget
       name="<?= esc_attr($this->get_field_name('title'));?>"
       type="text"
       value="<?=esc_attr($title);?>">
+		</p>
+
+    <!-- CHANNEL -->
+		<p>
+  		<label for="<?php echo esc_attr($this->get_field_id('channel')); ?>">
+        <?php esc_attr_e('Channel:', 'yts_domain'); ?>
+      </label>
+  		<input
+      class="widefat"
+      id="<?=esc_attr($this->get_field_id('channel'));?>"
+      name="<?= esc_attr($this->get_field_name('channel'));?>"
+      type="text"
+      value="<?=esc_attr($channel);?>">
 		</p>
 		<?php
     }
@@ -78,6 +94,7 @@ class Youtube_subs_Widget extends WP_Widget
     {
         $instance = array();
         $instance['title'] = (! empty($new_instance['title'])) ? sanitize_text_field($new_instance['title']) : '';
+        $instance['channel'] = (! empty($new_instance['channel'])) ? sanitize_text_field($new_instance['channel']) : '';
 
         return $instance;
     }
