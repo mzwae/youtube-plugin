@@ -35,7 +35,7 @@ class Youtube_subs_Widget extends WP_Widget
 
         // Widget Content Output
         // echo esc_html__('Hello, World!', 'yts_domain');
-        echo '<div class="g-ytsubscribe" data-channel="'.$instance['channel'].'" data-layout="full" data-count="default"></div>';
+        echo '<div class="g-ytsubscribe" data-channel="'.$instance['channel'].'" data-layout="'.$instance['layout'].'" data-count="default"></div>';
 
         echo $args['after_widget'];
     }
@@ -51,6 +51,7 @@ class Youtube_subs_Widget extends WP_Widget
     {
         $title = ! empty($instance['title']) ? $instance['title'] : esc_html__('YouTube Subs', 'yts_domain');
         $channel = ! empty($instance['channel']) ? $instance['channel'] : esc_html__('GoogleDevelopers', 'yts_domain');
+        $layout = ! empty($instance['layout']) ? $instance['layout'] : esc_html__('default', 'yts_domain');
          ?>
          <!-- TITLE -->
 		<p>
@@ -77,6 +78,25 @@ class Youtube_subs_Widget extends WP_Widget
       type="text"
       value="<?=esc_attr($channel);?>">
 		</p>
+    <!-- LAYOUT -->
+		<p>
+  		<label for="<?php echo esc_attr($this->get_field_id('layout')); ?>">
+        <?php esc_attr_e('Layout:', 'yts_domain'); ?>
+      </label>
+  		<select
+      class="widefat"
+      id="<?=esc_attr($this->get_field_id('layout'));?>"
+      name="<?= esc_attr($this->get_field_name('layout'));?>"
+      type="text">
+        <option value="default" <?php echo($layout == 'default')? 'selected':''; ?>>
+          Default
+        </option>
+        <option value="full" <?php echo($layout == 'full')? 'selected':''; ?>>
+          Full
+        </option>
+
+      </select>
+		</p>
 		<?php
     }
 
@@ -95,6 +115,7 @@ class Youtube_subs_Widget extends WP_Widget
         $instance = array();
         $instance['title'] = (! empty($new_instance['title'])) ? sanitize_text_field($new_instance['title']) : '';
         $instance['channel'] = (! empty($new_instance['channel'])) ? sanitize_text_field($new_instance['channel']) : '';
+        $instance['layout'] = (! empty($new_instance['layout'])) ? sanitize_text_field($new_instance['layout']) : '';
 
         return $instance;
     }
